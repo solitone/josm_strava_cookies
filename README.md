@@ -9,11 +9,21 @@ Utility for setting Strava cookies in JOSM preferences. This allows to get a hig
 1. Browse to the [Strava Heatmap](https://www.strava.com/heatmap) and setup a Strava account.
 2. Log in with your Strava credentials, flagging the *remember me* checkbox.
 3. In JOSM preferences, activate the Strava imagery URLs that you need.
-4. Change each default imagery URL string from e.g.
-`tms[3,11]:https://heatmap-external-{switch:a,b,c}.strava.com/tiles/run/bluered/{zoom}/{x}/{y}.png`
-to `tms[3,15]:https://heatmap-external-{switch:a,b,c}.strava.com/tiles-auth/run/bluered/{zoom}/{x}/{y}.png`.
+4. Change each default imagery URL string from e.g.:
+```
+tms[3,11]:https://heatmap-external-{switch:a,b,c}.strava.com/tiles/run/bluered/{zoom}/{x}/{y}.png
+```
+to:
+```
+tms[3,15]:https://heatmap-external-{switch:a,b,c}.strava.com/tiles-auth/run/bluered/{zoom}/{x}/{y}.png
+```
+.
 5. From the command line run `$ python upd_strava_prefs.py`.
-6. The imagery URL should be updated to `tms[3,15]:https://heatmap-external-{switch:a,b,c}.strava.com/tiles-auth/run/bluered/{zoom}/{x}/{y}.png?Key-Pair-Id=<YOUR_KEY_PAIR_ID_COOKIE_VALUE>&Policy=<YOUR_POLICY_COOKIE_VALUE>&Signature=<YOUR_SIGNATURE_COOKIE_VALUE>`.
+6. The imagery URL should be updated to:
+```
+tms[3,15]:https://heatmap-external-{switch:a,b,c}.strava.com/tiles-auth/run/bluered/{zoom}/{x}/{y}.png?Key-Pair-Id=<YOUR_KEY_PAIR_ID_COOKIE_VALUE>&Policy=<YOUR_POLICY_COOKIE_VALUE>&Signature=<YOUR_SIGNATURE_COOKIE_VALUE>
+```
+.
 
 ## Licence
 - `josm_strava_cookies` is distributed under the GPL v3.0.
