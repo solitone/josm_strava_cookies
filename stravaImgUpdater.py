@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 
 from stravaImgUpdError import *
 
-class StravaImgUpdater():
+class StravaImgUpdater(object):
     def __init__(self):
         self.keyPairId = ""
         self.policy = ""
@@ -36,6 +36,7 @@ class StravaImgUpdater():
 
 class MacOsStravaImgUpdater(StravaImgUpdater):
     def __init__(self):
+        super(MacOsStravaImgUpdater, self).__init__()
         self.preferences = os.path.expanduser('~/Library/Preferences/JOSM/preferences.xml')
 
     def getCookies(self):

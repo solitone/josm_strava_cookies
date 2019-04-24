@@ -10,7 +10,6 @@ try:
         raise UpdImgPrefsOsError(platform.system())
 
     stravaImgUpdater.getCookies()
-
     print("Backing up preferences.xml...")
     stravaImgUpdater.bakPrefs()
     stravaImgUpdater.updPrefs()
