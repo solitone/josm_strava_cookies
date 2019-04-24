@@ -7,7 +7,7 @@ Utility for setting Strava cookies in JOSM preferences. This allows to get a hig
 
 ## Usage
 1. Browse to the [Strava Heatmap](https://www.strava.com/heatmap) and setup a Strava account.
-2. Log in with your Strava credentials, flagging the *remember me* checkbox.
+2. Log in with your Strava credentials, flagging the *remember me* checkbox. Move the map and zoom in and out, in order to be sure to get the needed cookies.
 3. In JOSM preferences, activate the Strava imagery URLs that you need.
 4. Change each default imagery URL string from e.g.:
 ```
