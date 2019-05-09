@@ -1,23 +1,22 @@
 import platform
 
-from stravaImgUpdater import *
-from stravaImgUpdError import *
+from stravaJosmImgUpdater import *
+from stravaCFetchError import *
 
 try:
     if (platform.system() == "Darwin"):
-        stravaImgUpdater = MacOsStravaImgUpdater()
+        stravaJosmImgUpdater = MacOsStravaJosmImgUpdater()
     else:
-        raise UpdImgPrefsOsError(platform.system())
+        raise StravaCFetchOsError(platform.system())
 
-    stravaImgUpdater.getCookies()
     print("Backing up preferences.xml...")
-    stravaImgUpdater.bakPrefs()
-    stravaImgUpdater.updPrefs()
+    stravaJosmImgUpdater.bakPrefs()
+    stravaJosmImgUpdater.updPrefs()
     print("Done.")
 
-except StravaImgUpdOsError as e:
+except StravaCFetchOsError as e:
     print("Only Safari on macOS currently supported.")
     print("Detected OS: " + e.message)
-except StravaImgUpdCookieError as e:
+except StravaCFetchCookieError as e:
     print("No Strava cookies found!")
     print(e.message)

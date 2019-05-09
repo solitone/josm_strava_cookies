@@ -1,11 +1,11 @@
-class StravaImgUpdError(Exception):
+class StravaCFetchError(Exception):
     """Base class for exceptions in this module."""
     pass
 
-class StravaImgUpdCookieError(StravaImgUpdError):
+class StravaCFetchCookieError(StravaCFetchError):
     def __init__(self, message):
         self.message = message
 
-class StravaImgUpdOsError(StravaImgUpdError):
+class StravaCFetchOsError(StravaCFetchError):
     def __init__(self, message):
         self.message = message
