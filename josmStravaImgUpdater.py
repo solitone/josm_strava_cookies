@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 #from stravaCFetchError import *
 from stravaCookieFetcher import *
 
-class StravaJosmImgUpdater(object):
+class JosmStravaImgUpdater(object):
     def __init__(self):
         self.josmPreferences = "./fakepath.xml" # has to be set in OS-specific constructor
 
@@ -18,8 +18,6 @@ class StravaJosmImgUpdater(object):
     def updPrefs(self):
         stravaCookieFetcher = MacOsStravaCookieFetcher()
         stravaCookieFetcher.fetchCookies()
-        print(stravaCookieFetcher)
-        stravaCookieFetcher.setCookieString()
         cookieString = stravaCookieFetcher.getCookieString()
 
         ET.register_namespace('', "http://josm.openstreetmap.de/preferences-1.0")
@@ -37,7 +35,7 @@ class StravaJosmImgUpdater(object):
         print("Writing out preferences.xml...")
         doc.write(self.josmPreferences, encoding="UTF-8")
 
-class MacOsStravaJosmImgUpdater(StravaJosmImgUpdater):
+class MacOsJosmStravaImgUpdater(JosmStravaImgUpdater):
     def __init__(self):
-        super(MacOsStravaJosmImgUpdater, self).__init__()
+        super(MacOsJosmStravaImgUpdater, self).__init__()
         self.josmPreferences = os.path.expanduser('~/Library/Preferences/JOSM/preferences.xml')

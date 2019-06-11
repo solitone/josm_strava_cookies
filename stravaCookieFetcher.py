@@ -21,11 +21,13 @@ class StravaCookieFetcher(object):
 
 
 class MacOsStravaCookieFetcher(StravaCookieFetcher):
-    # def __init__(self):
-    #     super(MacOsStravaCookieFetcher, self).__init__()
-
     def fetchCookies(self):
-        cookieReaderScript = "python ./BinaryCookieReader.py " + os.path.expanduser('~/Library/Cookies/Cookies.binarycookies')
+        # get the dir where file stravaCookieFetcher.py is saved
+        pyFileDir = os.path.dirname(os.path.realpath(__file__))
+        cookieReaderScript = (
+                                "python " + pyFileDir + "/BinaryCookieReader.py "
+                                + os.path.expanduser('~/Library/Cookies/Cookies.binarycookies')
+                             )
         process = subprocess.Popen(cookieReaderScript, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         out, err = process.communicate()
         result = out.split('\n')
@@ -39,3 +41,4 @@ class MacOsStravaCookieFetcher(StravaCookieFetcher):
         if (self.keyPairId == "" or self.policy == "" or self.signature == ""):
             message = "Open Safari, browse to the Strava Heatmap, and login with your Strava account."
             raise StravaCFetchCookieError(message)
+        self.setCookieString()

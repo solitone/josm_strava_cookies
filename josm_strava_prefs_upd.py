@@ -1,17 +1,17 @@
 import platform
 
-from stravaJosmImgUpdater import *
+from josmStravaImgUpdater import *
 from stravaCFetchError import *
 
 try:
     if (platform.system() == "Darwin"):
-        stravaJosmImgUpdater = MacOsStravaJosmImgUpdater()
+        stravaImgUpdater = MacOsJosmStravaImgUpdater()
     else:
         raise StravaCFetchOsError(platform.system())
 
     print("Backing up preferences.xml...")
-    stravaJosmImgUpdater.bakPrefs()
-    stravaJosmImgUpdater.updPrefs()
+    stravaImgUpdater.bakPrefs()
+    stravaImgUpdater.updPrefs()
     print("Done.")
 
 except StravaCFetchOsError as e:
