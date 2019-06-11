@@ -26,14 +26,15 @@ tms[3,15]:https://heatmap-external-{switch:a,b,c}.strava.com/tiles-auth/run/blue
 ```
 
 ### Cartograph support
-Since version 1.4 it is possible to prepare Strava Heatmap TMS URLs also for [Cartograph] (https://www.cartograph.eu). Cartograph runs under iOS and macOS, as well as Android.
+Since version 1.4 it is possible to prepare Strava Heatmap TMS URLs also for [Cartograph](https://www.cartograph.eu). Cartograph runs under iOS and macOS, as well as Android.
 
-The script `util/icloud_carto_omapdef.sh` writes Strava URLs in an [online map definition file] (https://www.cartograph.eu/help_onlinemapimport). An online map definition file is a JSON file that can be imported directly in Cartograph. The file is saved on iCloud, in the `Cartograph Pro` folder:
-`<HOME>/Library/Mobile Documents/com~apple~CloudDocs/Cartograph Pro`. After importing the map definition file in Cartograph, the following maps will be available in the Manage Maps menu:
+The script `util/icloud_carto_omapdef.sh` writes Strava URLs in an [online map definition file](https://www.cartograph.eu/help_onlinemapimport). An online map definition file is a JSON file that can be imported directly in Cartograph. The file is saved on iCloud, in the `Cartograph Pro` folder:
+`<HOME>/Library/Mobile Documents/com~apple~CloudDocs/Cartograph Pro`. After importing the map definition file in Cartograph, the following maps will be available in the *Manage Maps* menu:
 - Strava Heatmap (ride&run)
 - Strava Heatmap (ride)
 - Strava Heatmap (run)
 - Strava Heatmap (winter)
+
 Before importing a new map definition file to update the Strava URLs, remove any Strava Heatmap from the map.
 
 There is a similar script `util/icloud_carto_gen_urls.sh` which saves in the same location a file containing just the Strava URLs. Those URLs should then be copied and pasted manually in Cartograph.
