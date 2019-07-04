@@ -5,6 +5,11 @@
 # https://www.cartograph.eu
 
 OUTDIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Cartograph Pro"
+
+if [ ! -d "$OUTDIR" ]; then
+  mkdir "$OUTDIR"
+fi
+
 ./gen_urls.sh -c -R > "$OUTDIR/strava_urls.txt"
 echo -e "\n" >> "$OUTDIR/strava_urls.txt"
 ./gen_urls.sh -c -b >> "$OUTDIR/strava_urls.txt"

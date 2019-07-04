@@ -6,4 +6,8 @@
 
 OUTDIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Cartograph Pro"
 
+if [ ! -d "$OUTDIR" ]; then
+  mkdir "$OUTDIR"
+fi
+
 python ../carto_strava_omapdef.py > "$OUTDIR/carto_strava.onlinemap"
