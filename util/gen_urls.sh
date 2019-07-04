@@ -18,7 +18,7 @@ display_usage() {
   echo " -j   Generate Strava URL for JOSM"
   echo " -o   Generate Strava URL for Oruxmaps"
   echo
-  echo " -b   Activity type: both ride and run"
+  echo " -b   Activity type: all activities"
   echo " -R   Activity type: ride"
   echo " -r   Activity type: run"
   echo " -w   Activity type: winter sports"

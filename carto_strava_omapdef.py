@@ -13,7 +13,7 @@ activities = {  "both": "both",
                 "ride": "ride",
                 "run": "run",
                 "winter": "winter"}
-mapNames = {"both": "Strava Heatmap (ride&run)",
+mapNames = {"both": "Strava Heatmap (all)",
             "ride": "Strava Heatmap (ride)",
             "run": "Strava Heatmap (run)",
             "winter": "Strava Heatmap (winter)"}
