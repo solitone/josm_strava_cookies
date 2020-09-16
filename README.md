@@ -5,7 +5,7 @@ Utility for setting Strava cookies in JOSM preferences. This allows to get a hig
 Two possible set-ups:
 - Python 2 (the pre-installed version that comes with macOS works) +
 OSX and Safari
-- Python 3 + package 'browser_cookie3', browsers Firefox or Chrome on OSX
+- Python 3 + package 'browser_cookie3' (https://pypi.org/project/browser-cookie3/), browsers Firefox or Chrome on OSX
 
 Extension to other Operating Systems is in progress
 
