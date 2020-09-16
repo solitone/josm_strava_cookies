@@ -2,8 +2,11 @@
 Utility for setting Strava cookies in JOSM preferences. This allows to get a high resolution [Strava Heatmap](https://www.strava.com/heatmap).
 
 ## Requirements
-- python 2 is required. The pre-installed version that comes with macOS works properly.
-- Currently, only macOS and the Safari browser are supported.
+Two possible set-ups:
+- Python 2 (the pre-installed version that comes with macOS works) +
+OSX and Safari
+- Python 3 + package 'browser_cookie3', browsers Firefox or Chrome on OSX
+- Extension to other Operating Systems is in progress
 
 ## Usage
 1. Browse to the [Strava Heatmap](https://www.strava.com/heatmap) and setup a Strava account.
@@ -18,7 +21,7 @@ to:
 tms[3,15]:https://heatmap-external-{switch:a,b,c}.strava.com/tiles-auth/run/bluered/{zoom}/{x}/{y}.png
 ```
 5. Close JOSM.
-6. Grant Terminal with full disk access (macOS System Preferences > Security & Privacy > Privacy > Full Disk Access > Add the Terminal application).
+6. If using Safari on OSX: grant Terminal with full disk access (macOS System Preferences > Security & Privacy > Privacy > Full Disk Access > Add the Terminal application).
 7. From the command line run `$ python josm_strava_prefs_upd.py`
 8. The imagery URL should be updated to:
 ```
