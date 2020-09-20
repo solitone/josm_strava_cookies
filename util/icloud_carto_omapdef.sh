@@ -10,4 +10,4 @@ if [ ! -d "$OUTDIR" ]; then
   mkdir "$OUTDIR"
 fi
 
-python ../carto_strava_omapdef.py > "$OUTDIR/carto_strava.onlinemap"
+python3 ../carto_strava_omapdef.py > "$OUTDIR/carto_strava.onlinemap"
