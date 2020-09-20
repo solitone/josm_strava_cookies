@@ -30,7 +30,7 @@ tms[3,15]:https://heatmap-external-{switch:a,b,c}.strava.com/tiles-auth/run/blue
 ```
 5. Close JOSM.
 6. If using Safari on OSX: grant Terminal with full disk access (macOS System Preferences > Security & Privacy > Privacy > Full Disk Access > Add the Terminal application).
-7. From the command line run `$ python josm_strava_prefs_upd.py`
+7. From the command line, run `$ python3 josm_strava_prefs_upd.py`
 8. The imagery URL should be updated to:
 ```
 tms[3,15]:https://heatmap-external-{switch:a,b,c}.strava.com/tiles-auth/run/bluered/{zoom}/{x}/{y}.png?Key-Pair-Id=<YOUR_KEY_PAIR_ID_COOKIE_VALUE>&Policy=<YOUR_POLICY_COOKIE_VALUE>&Signature=<YOUR_SIGNATURE_COOKIE_VALUE>
