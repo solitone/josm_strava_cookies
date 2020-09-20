@@ -60,7 +60,8 @@ class StravaCookieFetcher(object):
             return
         except Exception as e:
             print( e )
-            print( "Couldn't retrieve appropriate cookies from Firefox, either!" )
+            print( "Couldn't retrieve appropriate cookies from Firefox." )
+            print( "All supported browsers have been tried unsuccessfully." )
         message = ( "Open https://www.strava.com/heatmap in any supported browser, and log in with your Strava account." )
         raise StravaCFetchCookieError(message) 
         
@@ -71,14 +72,16 @@ class MacOsStravaCookieFetcher(StravaCookieFetcher):
         # get the dir where file stravaCookieFetcher.py is saved
         pyFileDir = os.path.dirname(os.path.realpath(__file__))
         cookieReaderScript = (
-                                "python " + pyFileDir + "/BinaryCookieReader.py "
+                                "python3 " + pyFileDir + "/BinaryCookieReader.py "
                                 + os.path.expanduser('~/Library/Cookies/Cookies.binarycookies')
                              )
         process = subprocess.Popen(cookieReaderScript, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         out, err = process.communicate()
         try:
-            result = out.split('\n')
-        except TypeError as e:
+            out=out.decode('utf-8')
+            result=out.split('\n')
+        except Exception as e:
+            ## no access to Safari cookies
             result=None
         if result is None:
             message = "No usable Strava-heatmap cookies in Safari"
@@ -104,5 +107,6 @@ class MacOsStravaCookieFetcher(StravaCookieFetcher):
             return
         except StravaCFetchCookieError as e:
             print( e )
+            print( "Couldn't retrieve appropriate cookies from Safari, moving on" )
         super().fetchCookies()
 

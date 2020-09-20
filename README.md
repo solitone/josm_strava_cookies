@@ -1,12 +1,20 @@
 # josm_strava_cookies
-Utility for setting Strava cookies in JOSM preferences. This allows to get a high resolution [Strava Heatmap](https://www.strava.com/heatmap).
+Utility for setting Strava cookies in JOSM preferences. This allows to
+get a high-resolution [Strava Heatmap](https://www.strava.com/heatmap)
+as an overlay.
 
 ## Requirements
-Two possible set-ups:
-- Python 2 (the pre-installed version that comes with macOS works) +
-OSX and Safari
-- Python 3 + package 'browser_cookie3', browsers Firefox or Chrome on OSX
-- Extension to other Operating Systems is in progress
+This tool relies on Python 3, which will come pre-installed with
+most *x systems.  For OSX, a convenient way to install Python 3 is
+homebrew; see, e.g.,
+https://docs.python-guide.org/starting/install3/osx/
+
+For Safari users, no further packages are needed.
+For Chrome or Firefox, please install the package  'browser_cookie3'
+(pip install browser_cookie3):
+https://github.com/borisbabic/browser_cookie3
+
+Currently, this tool only support OSX.  Extension to other Operating Systems is in progress.
 
 ## Usage
 1. Browse to the [Strava Heatmap](https://www.strava.com/heatmap) and setup a Strava account.
