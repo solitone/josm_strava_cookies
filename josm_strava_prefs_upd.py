@@ -6,6 +6,10 @@ from stravaCFetchError import *
 try:
     if (platform.system() == "Darwin"):
         stravaImgUpdater = MacOsJosmStravaImgUpdater()
+    elif (platform.system() == "Linux"):
+        stravaImgUpdater = LinuxJosmStravaImgUpdater()
+    elif (platform.system() == "Windows"):
+        stravaImgUpdater = WindowsJosmStravaImgUpdater()
     else:
         raise StravaCFetchOsError(platform.system())
 
@@ -15,8 +19,11 @@ try:
     print("Done.")
 
 except StravaCFetchOsError as e:
-    print("Only Safari/Chrome/Firefox on macOS are currently supported.")
+    print("Only Chrome/Firefox on OSX/Linux/Windows (plus Safari on OSX) are supported.")
     print("Detected OS: " + e.message)
 except StravaCFetchCookieError as e:
     print("No Strava cookies found!")
     print(e.message)
+except StravaCFetchJosmprefsError as e:
+    print("Couldn't locate JOSM preferences file.")
+    print( e.message )

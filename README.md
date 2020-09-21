@@ -9,12 +9,12 @@ most *x systems.  For OSX, a convenient way to install Python 3 is
 homebrew; see, e.g.,
 https://docs.python-guide.org/starting/install3/osx/
 
-For Safari users, no further packages are needed.
+For Safari users on OSX, no further packages are needed.
 For Chrome or Firefox, please install the package  'browser_cookie3'
 (pip install browser_cookie3):
 https://github.com/borisbabic/browser_cookie3
 
-Currently, this tool only support OSX.  Extension to other Operating Systems is in progress.
+This tool supports OSX and Linux.  Support for Chrome/Firefox on Windows has been added but not tested---test reports are welcome!
 
 ## Usage
 1. Browse to the [Strava Heatmap](https://www.strava.com/heatmap) and setup a Strava account.
