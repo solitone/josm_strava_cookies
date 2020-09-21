@@ -54,7 +54,6 @@ class StravaCookieFetcher(object):
         except Exception as e:
             print( e )
             print( "Couldn't retrieve appropriate cookies from Chrome, moving on." )
-
         try:
             self.fetchFirefoxCookies()
             return
@@ -109,4 +108,3 @@ class MacOsStravaCookieFetcher(StravaCookieFetcher):
             print( e )
             print( "Couldn't retrieve appropriate cookies from Safari, moving on" )
         super().fetchCookies()
-

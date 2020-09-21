@@ -1,14 +1,13 @@
 import os
 import datetime
-#import subprocess
 from shutil import copy
 import xml.etree.ElementTree as ET
-
 from stravaCookieFetcher import *
 
 class JosmStravaImgUpdater(object):
     def __init__(self):
         self.josmPreferences = "./fakepath.xml" # has to be set in OS-specific constructor
+        self.cookieFetcher=StravaCookieFetcher() # may be overridden in OS-specific constructor
 
     def bakPrefs(self):
         bakfile = self.josmPreferences + '.' + datetime.datetime.now().strftime("%Y%m%d%H%M%S") + '.bak'
@@ -18,7 +17,6 @@ class JosmStravaImgUpdater(object):
         stravaCookieFetcher = self.cookieFetcher
         stravaCookieFetcher.fetchCookies()
         cookieString = stravaCookieFetcher.getCookieString()
-
         ET.register_namespace('', "http://josm.openstreetmap.de/preferences-1.0")
         doc = ET.parse(self.josmPreferences)
         root = doc.getroot()
@@ -37,14 +35,14 @@ class JosmStravaImgUpdater(object):
         
 class MacOsJosmStravaImgUpdater( JosmStravaImgUpdater ):
     def __init__( self ):
-        super(MacOsJosmStravaImgUpdater, self).__init__()
+        super().__init__()
         self.josmPreferences = os.path.expanduser('~/Library/Preferences/JOSM/preferences.xml')
         self.cookieFetcher=MacOsStravaCookieFetcher()
 
         
 class LinuxJosmStravaImgUpdater( JosmStravaImgUpdater ):
     def __init__( self ):
-        super(LinuxJosmStravaImgUpdater, self).__init__()
+        super().__init__()
         # On Linux, three possible locations for JOSM preference file 
         # according to https://josm.openstreetmap.de/wiki/Help/Preferences
         # (plus, users may specify a custom directory within JOSM;
@@ -63,11 +61,11 @@ class LinuxJosmStravaImgUpdater( JosmStravaImgUpdater ):
             message+= "(custom preference locations are not supported)" 
             raise StravaCFetchJosmprefsError(message)            
         self.josmPreferences = pref
-        self.cookieFetcher=StravaCookieFetcher()
 
+        
 class WindowsJosmStravaImgUpdater( JosmStravaImgUpdater ):
     def __init__( self ):
-        super(WindowsJosmStravaImgUpdater, self).__init__()
+        super().__init__()
         self.josmPreferences = os.path.join(
             os.path.expandvars('%APPDATA%\JOSM'),
             'preferences.xml')
@@ -76,5 +74,3 @@ class WindowsJosmStravaImgUpdater( JosmStravaImgUpdater ):
         if not os.path.isfile( self.josmPreferences ):
             message = "Expect preferences.xml to sit in %APPDATA%\JOSM" 
             raise StravaCFetchJosmprefsError(message)
-        self.cookieFetcher=StravaCookieFetcher()
-        

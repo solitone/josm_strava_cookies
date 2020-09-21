@@ -21,6 +21,10 @@ mapNames = {"both": "Strava Heatmap (all)",
 try:
     if (platform.system() == "Darwin"):
         stravaCookieFetcher = MacOsStravaCookieFetcher()
+    elif( platform.system() == 'Linux' ):
+        stravaCookieFetcher = StravaCookieFetcher()
+    elif( platform.system() == 'Windows' ):
+        stravaCookieFetcher = StravaCookieFetcher()
     else:
         raise StravaCFetchOsError(platform.system())
 
@@ -63,7 +67,7 @@ try:
 
 
 except StravaCFetchOsError as e:
-    print("Only Safari/Chrome/Firefox on macOS are currently supported.")
+    print("Only Chrome/Firefox on OSX/Linux/Windows (plus Safari on OSX) are currently supported.")
     print("Detected OS: " + e.message)
 except StravaCFetchCookieError as e:
     print("No Strava cookies found!")

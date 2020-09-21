@@ -1,9 +1,11 @@
 #*******************************************************************************#
 # BinaryCookieReader: Written By Satishb3 (http://www.securitylearn.net)        #
+# Ported to Python3 by https://github.com/smootheFiets                          #
+# (for use in https://github.com/smootheFiets/josm_strava_cookies)              #
 #                                                                               #
 # For any bug fixes contact me: satishb3@securitylearn.net                      #
 #                                                                               #
-# Usage: Python BinaryCookieReader.py Cookie.Binarycookies-FilePath             #
+# Usage: python3 BinaryCookieReader.py Cookie.Binarycookies-FilePath            #
 #                                                                               #
 # Safari browser and iOS applications store the persistent cookies in a binary  #
 # file names Cookies.binarycookies.BinaryCookieReader is used to dump all the   #
