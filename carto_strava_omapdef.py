@@ -9,11 +9,11 @@ from stravaCookieFetcher import *
 from stravaCFetchError import *
 
 urlTemplate = Template("https://heatmap-external-a.strava.com/tiles-auth/$activity/bluered/{z}/{x}/{y}.png?$cookieString")
-activities = {  "both": "both",
+activities = {  "all": "all",
                 "ride": "ride",
                 "run": "run",
                 "winter": "winter"}
-mapNames = {"both": "Strava Heatmap (all)",
+mapNames = {"all": "Strava Heatmap (all)",
             "ride": "Strava Heatmap (ride)",
             "run": "Strava Heatmap (run)",
             "winter": "Strava Heatmap (winter)"}
