@@ -4,7 +4,6 @@ import datetime
 from shutil import copy
 import xml.etree.ElementTree as ET
 
-#from stravaCFetchError import *
 from stravaCookieFetcher import *
 
 class JosmStravaImgUpdater(object):
