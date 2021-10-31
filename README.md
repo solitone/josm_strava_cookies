@@ -46,15 +46,26 @@ tms[3,15]:https://heatmap-external-{switch:a,b,c}.strava.com/tiles-auth/run/blue
 ```
 
 ### Cartograph support
-Since version 1.4, macOS users can prepare Strava Heatmap TMS URLs also
-for [Cartograph](https://www.cartograph.eu). Cartograph runs under iOS
+It is also possible to prepare Strava Heatmap TMS URLs for
+[Cartograph](https://www.cartograph.eu). Cartograph runs under iOS
 and macOS, as well as Android.
 
-The script `util/icloud_carto_omapdef.sh` writes Strava URLs in an
+The scripts `util/icloud_carto_omapdef.sh` (macOS and linux users) and
+`util/icloud_carto_omapdef.bat` (Windows users) write out Strava URLs in an
 [online map definition file](https://www.cartograph.eu/help_onlinemapimport).
 An online map definition file is a JSON file that can be imported directly
-in Cartograph. The file is saved on iCloud, in the `Cartograph Pro` folder:
-`<HOME>/Library/Mobile Documents/com~apple~CloudDocs/Cartograph Pro`.
+in Cartograph.
+
+The `icloud_carto_omapdef.sh` script has been tested under macOS, and should also work
+under linux, but has not been tested. The `icloud_carto_omapdef.bat` script
+has not been tested either.
+
+The omapdef file will be saved on the current directory. macOS users can decide
+to save the omapdef file in iCloud, by specifying the `--icloud` flag. In this
+case, the file will be saved in the
+`<HOME>/Library/Mobile Documents/com~apple~CloudDocs/Cartograph Pro` folder,
+for an easy import into Cartograph.
+
 After importing the map definition file in Cartograph, the following maps
 will be available in the *Manage Maps* menu:
 - Strava Heatmap (all)
@@ -65,8 +76,9 @@ will be available in the *Manage Maps* menu:
 Before importing a new map definition file to update the Strava URLs,
 remove any Strava Heatmap from the map.
 
-There is a similar script `util/icloud_carto_gen_urls.sh` which saves
-in the same location a file containing just the Strava URLs.
+There is a similar script `util/icloud_carto_gen_urls.sh`
+(unfortunately it only works on macOS and linux) which saves 
+a file containing just the Strava URLs.
 Those URLs should then be copied and pasted manually in Cartograph.
 
 ## Licence
