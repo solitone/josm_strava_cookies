@@ -23,13 +23,13 @@ class StravaCookieFetcher(object):
 
     def fetchFirefoxCookies(self):
         import browser_cookie3
-        # import only here, so browser_cookie3 is _not_ required on vanilla OSX/Safari
+        # import only here, so browser_cookie3 is _not_ required on vanilla macOS/Safari
         cookiejar = browser_cookie3.firefox()
         self.processCookieJar(cookiejar, 'Firefox')
 
     def fetchChromeCookies(self):
         import browser_cookie3
-        # import only here, so browser_cookie3 is _not_ required on vanilla OSX/Safari
+        # import only here, so browser_cookie3 is _not_ required on vanilla macOS/Safari
         cookiejar = browser_cookie3.chrome()
         self.processCookieJar(cookiejar, 'Chrome')
 
@@ -62,8 +62,8 @@ class StravaCookieFetcher(object):
             print( "Couldn't retrieve appropriate cookies from Firefox." )
             print( "All supported browsers have been tried unsuccessfully." )
         message = ( "Open https://www.strava.com/heatmap in any supported browser, and log in with your Strava account." )
-        raise StravaCFetchCookieError(message) 
-        
+        raise StravaCFetchCookieError(message)
+
 
 
 class MacOsStravaCookieFetcher(StravaCookieFetcher):
@@ -98,9 +98,9 @@ class MacOsStravaCookieFetcher(StravaCookieFetcher):
             raise StravaCFetchCookieError(message)
         self.setCookieString()
 
-    
+
     def fetchCookies(self):
-        ## On OSX, support Safari on top of the default Chrome and Firefox
+        ## On macOS, support Safari on top of the default Chrome and Firefox
         try:
             self.fetchSafariCookies()
             return

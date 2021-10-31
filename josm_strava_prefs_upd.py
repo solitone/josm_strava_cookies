@@ -19,7 +19,7 @@ try:
     print("Done.")
 
 except StravaCFetchOsError as e:
-    print("Only Chrome/Firefox on OSX/Linux/Windows (plus Safari on OSX) are supported.")
+    print("Only Chrome/Firefox on macOS/linux/Windows (plus Safari on macOS) are supported.")
     print("Detected OS: " + e.message)
 except StravaCFetchCookieError as e:
     print("No Strava cookies found!")
