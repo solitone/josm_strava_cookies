@@ -1,13 +1,21 @@
 # josm_strava_cookies
-Utility for setting Strava cookies in JOSM preferences. This allows to get a high resolution [Strava Heatmap](https://www.strava.com/heatmap) as JOSM overlay; see also https://wiki.openstreetmap.org/wiki/Strava#Global_Heatmap.
+
+Utility for setting Strava cookies in JOSM preferences. This allows to
+get high-resolution [Strava Heatmaps](https://www.strava.com/heatmap)
+as an overlay in JOSM.
 
 ## Requirements
-Two possible set-ups:
-- Python 2 (the pre-installed version that comes with macOS works) +
-OSX and Safari
-- Python 3 + package 'browser_cookie3' (https://pypi.org/project/browser-cookie3/), browsers Firefox or Chrome on OSX
+This tool relies on Python 3, which comes pre-installed on
+most *x systems.  For OSX, a convenient way to install Python 3 is
+homebrew; see, e.g.,
+https://docs.python-guide.org/starting/install3/osx/
 
-Extension to other Operating Systems is in progress
+For Safari users, no further packages are needed.
+For Chrome or Firefox, please install the package  'browser_cookie3'
+(pip install browser_cookie3):
+https://github.com/borisbabic/browser_cookie3
+
+Currently, this tool only support OSX.  Extension to other Operating Systems is in progress.
 
 ## Usage
 1. Browse to the [Strava Heatmap](https://www.strava.com/heatmap) and setup a Strava account.
@@ -23,7 +31,7 @@ tms[3,15]:https://heatmap-external-{switch:a,b,c}.strava.com/tiles-auth/run/blue
 ```
 5. Close JOSM.
 6. If using Safari on OSX: grant Terminal with full disk access (macOS System Preferences > Security & Privacy > Privacy > Full Disk Access > Add the Terminal application).
-7. From the command line run `$ python josm_strava_prefs_upd.py`
+7. From the command line, run `$ python3 josm_strava_prefs_upd.py`
 8. The imagery URL should be updated to:
 ```
 tms[3,15]:https://heatmap-external-{switch:a,b,c}.strava.com/tiles-auth/run/bluered/{zoom}/{x}/{y}.png?Key-Pair-Id=<YOUR_KEY_PAIR_ID_COOKIE_VALUE>&Policy=<YOUR_POLICY_COOKIE_VALUE>&Signature=<YOUR_SIGNATURE_COOKIE_VALUE>
