@@ -18,7 +18,7 @@ For Chrome or Firefox users, please install the package `browser_cookie3`
 https://github.com/borisbabic/browser_cookie3
 
 This tool supports macOS and Linux. Support for Chrome/Firefox on Windows has
-been added but not yet tested---test reports are welcome!
+been added but not yet tested--test reports are welcome!
 
 ## Usage
 1. Browse to the [Strava Heatmap](https://www.strava.com/heatmap) and setup
