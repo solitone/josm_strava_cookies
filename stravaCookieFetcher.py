@@ -52,16 +52,16 @@ class StravaCookieFetcher(object):
             self.fetchChromeCookies()
             return
         except Exception as e:
-            print( e )
-            print( "Couldn't retrieve appropriate cookies from Chrome, moving on." )
+            print(e, file=sys.stderr)
+            print("Couldn't retrieve appropriate cookies from Chrome, moving on.", file=sys.stderr)
         try:
             self.fetchFirefoxCookies()
             return
         except Exception as e:
-            print( e )
-            print( "Couldn't retrieve appropriate cookies from Firefox." )
-            print( "All supported browsers have been tried unsuccessfully." )
-        message = ( "Open https://www.strava.com/heatmap in any supported browser, and log in with your Strava account." )
+            print(e, file=sys.stderr)
+            print("Couldn't retrieve appropriate cookies from Firefox.", file=sys.stderr)
+            print("All supported browsers have been tried unsuccessfully.", file=sys.stderr)
+        message = ("Open https://www.strava.com/heatmap in any supported browser, and log in with your Strava account.")
         raise StravaCFetchCookieError(message)
 
 
@@ -105,6 +105,6 @@ class MacOsStravaCookieFetcher(StravaCookieFetcher):
             self.fetchSafariCookies()
             return
         except StravaCFetchCookieError as e:
-            print( e )
-            print( "Couldn't retrieve appropriate cookies from Safari, moving on" )
+            print(e, file=sys.stderr)
+            print("Couldn't retrieve appropriate cookies from Safari, moving on.", file=sys.stderr)
         super().fetchCookies()
