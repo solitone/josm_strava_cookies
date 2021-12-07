@@ -1,5 +1,6 @@
 import os
 import subprocess
+import sys
 from stravaCFetchError import *
 
 class StravaCookieFetcher(object):
