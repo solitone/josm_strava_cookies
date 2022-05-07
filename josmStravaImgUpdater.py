@@ -13,9 +13,9 @@ class JosmStravaImgUpdater(object):
         bakfile = self.josmPreferences + '.' + datetime.datetime.now().strftime("%Y%m%d%H%M%S") + '.bak'
         copy(self.josmPreferences, bakfile)
 
-    def updPrefs(self):
+    def updPrefs(self, stravaEmail, stravaPassword):
         stravaCookieFetcher = self.cookieFetcher
-        stravaCookieFetcher.fetchCookies()
+        stravaCookieFetcher.fetchCookies(stravaEmail, stravaPassword)
         cookieString = stravaCookieFetcher.getCookieString()
         ET.register_namespace('', "http://josm.openstreetmap.de/preferences-1.0")
         doc = ET.parse(self.josmPreferences)
@@ -32,18 +32,17 @@ class JosmStravaImgUpdater(object):
         print("Writing out preferences.xml...")
         doc.write(self.josmPreferences, encoding="UTF-8")
 
-        
-class MacOsJosmStravaImgUpdater( JosmStravaImgUpdater ):
+
+class MacOsJosmStravaImgUpdater(JosmStravaImgUpdater):
     def __init__( self ):
         super().__init__()
         self.josmPreferences = os.path.expanduser('~/Library/Preferences/JOSM/preferences.xml')
-        self.cookieFetcher=MacOsStravaCookieFetcher()
-
         
-class LinuxJosmStravaImgUpdater( JosmStravaImgUpdater ):
+
+class LinuxJosmStravaImgUpdater(JosmStravaImgUpdater):
     def __init__( self ):
         super().__init__()
-        # On Linux, three possible locations for JOSM preference file 
+        # On Linux, three possible locations for JOSM preference file
         # according to https://josm.openstreetmap.de/wiki/Help/Preferences
         # (plus, users may specify a custom directory within JOSM;
         # this script doesn't support that)
@@ -56,14 +55,14 @@ class LinuxJosmStravaImgUpdater( JosmStravaImgUpdater ):
             except KeyError:
                 pref = os.path.expanduser('~/.config/JOSM/preferences.xml')
         if not os.path.isfile( pref ):
-            message = "Supported locations of preferences.xml:\n" 
+            message = "Supported locations of preferences.xml:\n"
             message+= "~/.josm/, $XDG_CONFIG_HOME/JOSM, or ~/.config/JOSM\n"
-            message+= "(custom preference locations are not supported)" 
-            raise StravaCFetchJosmprefsError(message)            
+            message+= "(custom preference locations are not supported)"
+            raise StravaCFetchJosmprefsError(message)
         self.josmPreferences = pref
 
-        
-class WindowsJosmStravaImgUpdater( JosmStravaImgUpdater ):
+
+class WindowsJosmStravaImgUpdater(JosmStravaImgUpdater):
     def __init__( self ):
         super().__init__()
         self.josmPreferences = os.path.join(
@@ -72,5 +71,5 @@ class WindowsJosmStravaImgUpdater( JosmStravaImgUpdater ):
         # location of JOSM preference file for Windows
         # according to https://josm.openstreetmap.de/wiki/Help/Preferences
         if not os.path.isfile( self.josmPreferences ):
-            message = "Expect preferences.xml to sit in %APPDATA%\JOSM" 
+            message = "Expect preferences.xml to sit in %APPDATA%\JOSM"
             raise StravaCFetchJosmprefsError(message)

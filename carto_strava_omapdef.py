@@ -7,6 +7,9 @@ import sys
 from pathlib import Path
 from string import Template
 
+from colorama import Fore, Style
+from getpass import getpass
+
 from stravaCookieFetcher import *
 from stravaCFetchError import *
 
@@ -40,6 +43,9 @@ while True:
         break
 color = answer
 
+stravaEmail = input(f"{Fore.CYAN}**** Enter your Strava account email:{Style.RESET_ALL} ")
+stravaPassword = getpass(f"{Fore.CYAN}**** Enter your Strava account password:{Style.RESET_ALL} ")
+
 activities = {  "all": "all",
                 "ride": "ride",
                 "run": "run",
@@ -53,16 +59,9 @@ mapNames = {"all": "Strava Heatmap (all)",
 urlTemplate = Template("https://heatmap-external-a.strava.com/tiles-auth/$activity/$color/{z}/{x}/{y}.png?$cookieString")
 
 try:
-    if (platform.system() == "Darwin"):
-        stravaCookieFetcher = MacOsStravaCookieFetcher()
-    elif( platform.system() == 'Linux' ):
-        stravaCookieFetcher = StravaCookieFetcher()
-    elif( platform.system() == 'Windows' ):
-        stravaCookieFetcher = StravaCookieFetcher()
-    else:
-        raise StravaCFetchOsError(platform.system())
-
-    stravaCookieFetcher.fetchCookies()
+    print("Creating online map definition file... ", end="", flush=True)
+    stravaCookieFetcher = StravaCookieFetcher()
+    stravaCookieFetcher.fetchCookies(stravaEmail, stravaPassword)
     cookieString = stravaCookieFetcher.getCookieString()
 
     maps = []
@@ -97,9 +96,10 @@ try:
     }
 
     print(json.dumps(onlinemap), file=open(outdir + "carto_strava.onlinemap", "w"))
+    print("done.")
 
 except StravaCFetchOsError as e:
-    print("Only Chrome/Firefox on macOS/Linux/Windows (plus Safari on macOS) are currently supported.", file=sys.stderr)
+    print("Only macOS/linux/Windows are supported..", file=sys.stderr)
     print("Detected OS: " + e.message, file=sys.stderr)
 except StravaCFetchCookieError as e:
     print("No Strava cookies found!", file=sys.stderr)

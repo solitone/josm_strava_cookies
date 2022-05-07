@@ -1,7 +1,9 @@
 import os
 import subprocess
 import sys
+
 from stravaCFetchError import *
+from stravaBrowser import *
 
 class StravaCookieFetcher(object):
     def __init__(self):
@@ -22,19 +24,7 @@ class StravaCookieFetcher(object):
     def getCookieString(self):
         return self.cookieString
 
-    def fetchFirefoxCookies(self):
-        import browser_cookie3
-        # import only here, so browser_cookie3 is _not_ required on vanilla macOS/Safari
-        cookiejar = browser_cookie3.firefox()
-        self.processCookieJar(cookiejar, 'Firefox')
-
-    def fetchChromeCookies(self):
-        import browser_cookie3
-        # import only here, so browser_cookie3 is _not_ required on vanilla macOS/Safari
-        cookiejar = browser_cookie3.chrome()
-        self.processCookieJar(cookiejar, 'Chrome')
-
-    def processCookieJar(self, cookiejar, browser):
+    def processCookieJar(self, cookiejar):
         for cookie in cookiejar:
             if "CloudFront-Key-Pair-Id" in cookie.name:
                 self.keyPairId = cookie.value
@@ -44,68 +34,16 @@ class StravaCookieFetcher(object):
                 self.signature = cookie.value
         if (self.keyPairId == "" or self.policy == "" or self.signature == ""):
             self.deleteCookieInfo()
-            message = "No usable Strava-heatmap cookies in %s"%browser
+            message = "No usable Strava-heatmap cookies found."
             raise StravaCFetchCookieError(message)
         self.setCookieString()
 
-    def fetchCookies(self):
+    def fetchCookies(self, stravaEmail, stravaPassword):
         try:
-            self.fetchChromeCookies()
-            return
+            browser = StravaBrowser()
+            browser.stravaLogin(stravaEmail, stravaPassword)
+            self.processCookieJar(browser.cookiejar)
         except Exception as e:
             print(e, file=sys.stderr)
-            print("Couldn't retrieve appropriate cookies from Chrome, moving on.", file=sys.stderr)
-        try:
-            self.fetchFirefoxCookies()
-            return
-        except Exception as e:
-            print(e, file=sys.stderr)
-            print("Couldn't retrieve appropriate cookies from Firefox.", file=sys.stderr)
-            print("All supported browsers have been tried unsuccessfully.", file=sys.stderr)
-        message = ("Open https://www.strava.com/heatmap in any supported browser, and log in with your Strava account.")
-        raise StravaCFetchCookieError(message)
-
-
-
-class MacOsStravaCookieFetcher(StravaCookieFetcher):
-    def fetchSafariCookies(self):
-        # get the dir where file stravaCookieFetcher.py is saved
-        pyFileDir = os.path.dirname(os.path.realpath(__file__))
-        cookieReaderScript = (
-                                "python3 " + pyFileDir + "/BinaryCookieReader.py "
-                                + os.path.expanduser('~/Library/Cookies/Cookies.binarycookies')
-                             )
-        process = subprocess.Popen(cookieReaderScript, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-        out, err = process.communicate()
-        try:
-            out=out.decode('utf-8')
-            result=out.split('\n')
-        except Exception as e:
-            ## no access to Safari cookies
-            result=None
-        if result is None:
-            message = "No usable Strava-heatmap cookies in Safari"
+            message = "Make sure to enter valid credentials."
             raise StravaCFetchCookieError(message)
-        for lin in result:
-            if "CloudFront-Key-Pair-Id" in lin:
-                self.keyPairId = lin.split('=')[1].split(';')[0]
-            elif "CloudFront-Policy" in lin:
-                self.policy = lin.split('=')[1].split(';')[0]
-            elif "CloudFront-Signature" in lin:
-                self.signature = lin.split('=')[1].split(';')[0]
-        if (self.keyPairId == "" or self.policy == "" or self.signature == ""):
-            self.deleteCookieInfo()
-            message = "No usable Strava-heatmap cookies in Safari"
-            raise StravaCFetchCookieError(message)
-        self.setCookieString()
-
-
-    def fetchCookies(self):
-        ## On macOS, support Safari on top of the default Chrome and Firefox
-        try:
-            self.fetchSafariCookies()
-            return
-        except StravaCFetchCookieError as e:
-            print(e, file=sys.stderr)
-            print("Couldn't retrieve appropriate cookies from Safari, moving on.", file=sys.stderr)
-        super().fetchCookies()

@@ -1,6 +1,9 @@
 import platform
 import sys
 
+from colorama import Fore, Style
+from getpass import getpass
+
 from josmStravaImgUpdater import *
 from stravaCFetchError import *
 
@@ -14,13 +17,17 @@ try:
     else:
         raise StravaCFetchOsError(platform.system())
 
+    stravaEmail = input(f"{Fore.CYAN}**** Enter your Strava account email:{Style.RESET_ALL} ")
+    stravaPassword = getpass(f"{Fore.CYAN}**** Enter your Strava account password:{Style.RESET_ALL} ")
+
     print("Backing up preferences.xml...")
     stravaImgUpdater.bakPrefs()
-    stravaImgUpdater.updPrefs()
+    print("Updating preferences.xml...")
+    stravaImgUpdater.updPrefs(stravaEmail, stravaPassword)
     print("Done.")
 
 except StravaCFetchOsError as e:
-    print("Only Chrome/Firefox on macOS/linux/Windows (plus Safari on macOS) are supported.", file=sys.stderr)
+    print("Only macOS/linux/Windows are supported.", file=sys.stderr)
     print("Detected OS: " + e.message, file=sys.stderr)
 except StravaCFetchCookieError as e:
     print("No Strava cookies found!", file=sys.stderr)
