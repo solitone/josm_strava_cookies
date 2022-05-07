@@ -30,7 +30,7 @@ except StravaCFetchOsError as e:
     print("Only macOS/linux/Windows are supported.", file=sys.stderr)
     print("Detected OS: " + e.message, file=sys.stderr)
 except StravaCFetchCookieError as e:
-    print("No Strava cookies found!", file=sys.stderr)
+    print("Strava cookies unavailable.", file=sys.stderr)
     print(e.message, file=sys.stderr)
 except StravaCFetchJosmprefsError as e:
     print("Couldn't locate JOSM preferences file.", file=sys.stderr)

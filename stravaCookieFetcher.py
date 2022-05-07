@@ -34,7 +34,7 @@ class StravaCookieFetcher(object):
                 self.signature = cookie.value
         if (self.keyPairId == "" or self.policy == "" or self.signature == ""):
             self.deleteCookieInfo()
-            message = "No usable Strava-heatmap cookies found."
+            message = "Authentication Strava cookies not found."
             raise StravaCFetchCookieError(message)
         self.setCookieString()
 
@@ -43,7 +43,11 @@ class StravaCookieFetcher(object):
             browser = StravaBrowser()
             browser.stravaLogin(stravaEmail, stravaPassword)
             self.processCookieJar(browser.cookiejar)
+        except StravaCFetchCookieError as e:
+            print(e, file=sys.stderr)
+            message = "Logged in successfully, but could not get authentication cookies."
+            raise StravaCFetchCookieError(message)
         except Exception as e:
             print(e, file=sys.stderr)
-            message = "Make sure to enter valid credentials."
+            message = "Make sure to provide correct Strava login information."
             raise StravaCFetchCookieError(message)

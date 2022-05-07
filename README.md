@@ -16,8 +16,14 @@ https://docs.python-guide.org/starting/install3/osx/. For Windows, see
 https://www.python.org/downloads/windows/.
 
 The following packages are also required:
-- TODO `browser_cookie3`, run `$ pip3 install browser_cookie3` from command line;
-- ... TODO ...
+- `colorama`;
+- `mechanize`.
+
+To install them, from the command line run:
+```
+pip3 install colorama
+pip3 install mechanize
+```
 
 A Strava account is required. Facebook/Google/Apple login to Strava is not
 supported.
