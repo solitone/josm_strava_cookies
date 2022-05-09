@@ -2,7 +2,8 @@ import os
 import datetime
 from shutil import copy
 import xml.etree.ElementTree as ET
-from stravaCookieFetcher import *
+
+from stravacookies.fetcher import StravaCookieFetcher
 
 class JosmStravaImgUpdater(object):
     def __init__(self):
@@ -37,7 +38,7 @@ class MacOsJosmStravaImgUpdater(JosmStravaImgUpdater):
     def __init__( self ):
         super().__init__()
         self.josmPreferences = os.path.expanduser('~/Library/Preferences/JOSM/preferences.xml')
-        
+
 
 class LinuxJosmStravaImgUpdater(JosmStravaImgUpdater):
     def __init__( self ):

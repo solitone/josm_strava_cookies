@@ -5,7 +5,7 @@ from colorama import Fore, Style
 from getpass import getpass
 
 from josmStravaImgUpdater import *
-from stravaCFetchError import *
+from stravacookies.fetch_error import StravaCFetchError, StravaCFetchCookieError, StravaCFetchOsError, StravaCFetchJosmprefsError
 
 try:
     if (platform.system() == "Darwin"):
