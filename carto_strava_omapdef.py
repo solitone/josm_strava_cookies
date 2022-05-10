@@ -10,8 +10,7 @@ from string import Template
 from colorama import Fore, Style
 from getpass import getpass
 
-from stravacookies.fetcher import StravaCookieFetcher
-from stravacookies.fetch_error import StravaCFetchError, StravaCFetchCookieError, StravaCFetchOsError, StravaCFetchJosmprefsError
+from stravacookies import StravaCookieFetcher, StravaCFetchError, StravaCFetchCookieError, StravaCFetchOsError, StravaCFetchJosmprefsError
 
 # Set location where output file will be written
 outdir = "./"

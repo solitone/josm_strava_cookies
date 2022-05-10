@@ -2,8 +2,7 @@ import os
 import subprocess
 import sys
 
-from stravacookies.browser import StravaBrowser
-from stravacookies.fetch_error import StravaCFetchError, StravaCFetchCookieError, StravaCFetchOsError, StravaCFetchJosmprefsError
+from stravacookies import StravaBrowser, StravaCFetchError, StravaCFetchCookieError, StravaCFetchOsError, StravaCFetchJosmprefsError
 
 class StravaCookieFetcher(object):
     def __init__(self):
