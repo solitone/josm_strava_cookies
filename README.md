@@ -17,12 +17,14 @@ https://www.python.org/downloads/windows/.
 
 The following packages are also required:
 - `colorama`;
-- `mechanize`.
+- `mechanize`;
+- `stravacookies`.
 
 To install them, from the command line run:
 ```
 pip3 install colorama
 pip3 install mechanize
+pip3 install stravacookies
 ```
 
 A Strava account is required. Facebook/Google/Apple login to Strava is not
@@ -77,35 +79,6 @@ When Cartograph Maps can no longer display the hi-res heatmap, it means
 Strava authentication cookies have expired. Remove any previous Strava Heatmap
 from Cartograph Maps, relaunch `carto_strava_omapdef.py`, and import the new
 oampdef file in Cartograph Maps.
-
-## How it works
-Hi-res heatmap is available to Strava registered users only. When you click to
-https://www.strava.com/heatmap and login to Strava, your browser gets several
-cookies that it uses to show Strava servers you are authorized to download
-the hi-res map.
-
-The authentication process consist of three steps:
-
-1. User fills login form at https://strava.com/login.
-2. Upon submit, browser sends a POST request to https://www.strava.com/session,
-email=<STRAVA_EMAIL>, password=<STRAVA_PASSWORD>, remember-me checkbox set,
-and receives _strava4_session, strava_remember_id, and strava_remember_token
-cookies from server.
-3. Browser sends a GET request to https://heatmap-external-a.strava.com/auth
-with session cookies set, and gets CloudFront-Signature, CloudFront-Policy, and
-CloudFront-Key-Pair-Id cookies from server.
-
-The last three cookies are those needed to allow browser to download
-the high-res heatmap. Concatenating the cookie strings to the TMS URLs (as
-shown below) allows external applications (such as JOSM or Cartograph Maps)
-to download the hi-res tiles from Strava.
-
-Example TMS URL:
-```
-tms[3,15]:https://heatmap-external-{switch:a,b,c}.strava.com/tiles-auth/run/hot/{zoom}/{x}/{y}.png?Key-Pair-Id=<YOUR_KEY_PAIR_ID_COOKIE_VALUE>&Policy=<YOUR_POLICY_COOKIE_VALUE>&Signature=<YOUR_SIGNATURE_COOKIE_VALUE>
-```
-Cookies expire, so it is necessary to re-login to Strava from time to
-time to get up to date cookies.
 
 ## Licence
 `josm_strava_cookies` is distributed under the GPL v3.0.
