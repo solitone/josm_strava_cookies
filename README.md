@@ -1,5 +1,9 @@
 # josm_strava_cookies
 
+***Version 3.1 is the last version of `josm_strava_cookies`.
+Further development will be made to new project
+[`stravaheatmap`](https://github.com/solitone/stravaheatmap)***
+
 Utility for setting Strava cookies in JOSM preferences. This allows to
 get high-resolution [Strava Heatmaps](https://www.strava.com/heatmap)
 as an overlay in JOSM.  Permission has been granted by Strava,
@@ -18,13 +22,13 @@ https://www.python.org/downloads/windows/.
 The following packages are also required:
 - `colorama`;
 - `mechanize`;
-- `stravacookies`.
+- `stravacookies` (version 1.1).
 
 To install them, from the command line run:
 ```
 pip3 install colorama
 pip3 install mechanize
-pip3 install stravacookies
+pip3 install stravacookies==1.1
 ```
 
 A Strava account is required. Facebook/Google/Apple login to Strava is not
